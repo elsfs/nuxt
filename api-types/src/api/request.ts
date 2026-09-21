@@ -20,10 +20,12 @@ export function createRequestClient(
   const client = new RequestClient({ ...options, baseURL });
 
   // 处理返回的响应数据格式
+  // 注：elsfs 后端的统一响应包裹为 { code, message, type, success, result, timestamp }，
+  // 业务载荷位于 `result` 字段（而非 vben 默认的 `data`），因此 dataField 需配置为 'result'。
   client.addResponseInterceptor(
     defaultResponseInterceptor({
       codeField: 'code',
-      dataField: 'data',
+      dataField: 'result',
       successCode: 0,
     }),
   );

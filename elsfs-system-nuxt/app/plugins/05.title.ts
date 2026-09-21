@@ -1,10 +1,9 @@
 import { watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { useTitle } from '@vueuse/core';
-
 import { preferences } from '@vben/preferences';
 
+import { useTitle } from '@vueuse/core';
 import { $t } from '~/locales';
 
 /**

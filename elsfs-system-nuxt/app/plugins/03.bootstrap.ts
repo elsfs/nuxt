@@ -4,7 +4,6 @@ import '@vben/styles';
 import '@vben/styles/ele';
 
 import { ElLoading } from 'element-plus';
-
 import { initComponentAdapter } from '~/adapter/component';
 import { initSetupVbenForm } from '~/adapter/form';
 

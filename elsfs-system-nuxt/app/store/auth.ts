@@ -24,6 +24,7 @@ export const useAuthStore = defineStore('auth', () => {
    * 异步处理登录操作
    * Asynchronously handle the login process
    * @param params 登录表单数据
+   * @param onSuccess
    */
   async function authLogin(
     params: Recordable<any>,
@@ -33,12 +34,12 @@ export const useAuthStore = defineStore('auth', () => {
     let userInfo: null | UserInfo = null;
     try {
       loginLoading.value = true;
-      const { accessToken } = await loginApi(params);
-
+      const { access_token } = await loginApi(params);
+      console.log('Login response:', { accessToken });
       // 如果成功获取到 accessToken
-      if (accessToken) {
+      if (access_token) {
         // 将 accessToken 存储到 accessStore 中
-        accessStore.setAccessToken(accessToken);
+        accessStore.setAccessToken(access_token);
 
         // 获取用户信息并存储到 accessStore 中
         const [fetchUserInfoResult, accessCodes] = await Promise.all([
@@ -69,6 +70,12 @@ export const useAuthStore = defineStore('auth', () => {
           });
         }
       }
+    } catch (error) {
+      // 请求层（errorMessageResponseInterceptor）已通过 ElMessage 提示错误，
+      // 这里兜底捕获，避免登录失败时向 @submit 事件处理器抛出未处理的 Promise
+      // rejection，从而触发 Vue 的 "Unhandled error during execution of
+      // component event handler" 警告。
+      console.error('Login failed:', error);
     } finally {
       loginLoading.value = false;
     }

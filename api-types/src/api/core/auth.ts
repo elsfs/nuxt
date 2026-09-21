@@ -20,6 +20,7 @@ export namespace AuthApi {
 
 /**
  * 登录
+ * 后端 result 中返回的是 snake_case 的 access_token，
  */
 export async function loginApi(data: AuthApi.LoginParams) {
   return requestClient().post<AuthApi.LoginResult>('/login', data);
