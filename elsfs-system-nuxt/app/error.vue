@@ -9,6 +9,8 @@ type FallbackStatus = '403' | '404' | '500' | 'coming-soon' | 'offline';
 
 defineOptions({ name: 'FallbackNotFound' });
 
+definePageMeta({ layout: 'basic'});
+
 const props = defineProps<{ error: NuxtError }>();
 
 const statusMap: Record<number, FallbackStatus> = {

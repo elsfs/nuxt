@@ -43,10 +43,3 @@ export async function logoutApi() {
     withCredentials: true,
   });
 }
-
-/**
- * 获取用户权限码
- */
-export async function getAccessCodesApi() {
-  return requestClient().get<string[]>('/codes');
-}

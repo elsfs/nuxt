@@ -5,7 +5,8 @@ import { preferences } from '@vben/preferences';
 import { useAccessStore, useUserStore } from '@vben/stores';
 import { generateMenus } from '@vben/utils';
 
-import { getAccessCodesApi, getAllMenusApi } from '~/api';
+import {    getAllMenusApi } from '@vben/api-types';
+
 import { useAuthStore } from '~/store';
 
 /**
@@ -82,13 +83,11 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   // 获取用户信息、权限码、菜单
   const userInfo = userStore.userInfo || (await authStore.fetchUserInfo());
-  const [accessCodes, menuRoutes] = await Promise.all([
-    getAccessCodesApi(),
+  const [ menuRoutes] = await Promise.all([
     getAllMenusApi(),
   ]);
 
   userStore.setUserInfo(userInfo);
-  accessStore.setAccessCodes(accessCodes);
   accessStore.setIsAccessChecked(true);
 
   // 生成菜单（文件式路由，无需动态注入路由到 vue-router）

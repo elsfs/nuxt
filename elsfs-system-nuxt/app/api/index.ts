@@ -2,7 +2,6 @@
 // `import type { AuthApi } from '@vben/api-types'`
 export {
   getAllMenusApi,
-  getAccessCodesApi,
   getUserInfoApi,
   loginApi,
   logoutApi,
