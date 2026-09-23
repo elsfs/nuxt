@@ -35,7 +35,7 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       loginLoading.value = true;
       const { access_token } = await loginApi(params);
-      console.log('Login response:', { accessToken });
+      console.log('Login response:', access_token);
       // 如果成功获取到 accessToken
       if (access_token) {
         // 将 accessToken 存储到 accessStore 中
@@ -71,7 +71,7 @@ export const useAuthStore = defineStore('auth', () => {
         }
       }
     } catch (error) {
-      // 请求层（errorMessageResponseInterceptor）已通过 ElMessage 提示错误，
+      // 请求层（app/api/request.ts）已通过全局错误弹窗/ElMessage 提示错误，
       // 这里兜底捕获，避免登录失败时向 @submit 事件处理器抛出未处理的 Promise
       // rejection，从而触发 Vue 的 "Unhandled error during execution of
       // component event handler" 警告。

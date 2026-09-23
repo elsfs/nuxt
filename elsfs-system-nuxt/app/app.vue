@@ -15,5 +15,7 @@ useElementPlusDesignTokens();
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+    <!-- 全局网络请求异常提示弹窗 -->
+    <ErrorMessage />
   </ElConfigProvider>
 </template>
