@@ -218,6 +218,13 @@ watch(
 
 <template>
   <BasicLayout @clear-preferences-and-logout="handleLogout">
+    <!--
+      主体内容插槽：默认不传时由 BasicLayout 内部渲染 <RouterView />；
+      传入时（例如 error.vue 复用 basic 布局展示错误页）则渲染传入内容。
+    -->
+    <template v-if="$slots.content" #content>
+      <slot name="content"></slot>
+    </template>
     <template #user-dropdown>
       <UserDropdown
         :avatar

@@ -51,20 +51,22 @@ const formSchema = computed((): VbenFormSchema[] => {
         placeholder: $t('authentication.usernameTip'),
       },
       dependencies: {
-        trigger(values, form) {
+        // 新 API：使用 resolve 替代已废弃的 trigger 回调
+        triggerFields: ['selectAccount'],
+        resolve: ({ actions, values }) => {
           if (values.selectAccount) {
             const findUser = MOCK_USER_OPTIONS.find(
               (item) => item.value === values.selectAccount,
             );
             if (findUser) {
-              form.setValues({
+              void actions.setValues({
                 password: 'Elsfs.2023',
                 username: findUser.value,
               });
             }
           }
+          return {};
         },
-        triggerFields: ['selectAccount'],
       },
       fieldName: 'username',
       label: $t('authentication.username'),
